@@ -12,7 +12,7 @@ public class Application {
         for (Method method : Address.class.getDeclaredMethods()) {
             if (method.isAnnotationPresent(Inspect.class)) {
                 var methodName = method.getName();
-                var methodReturnType = method.getReturnType().getCanonicalName();
+                var methodReturnType = method.getReturnType().getSimpleName();
 
                 System.out.println("Method " + methodName +
                     " returns a value of type " + methodReturnType);
