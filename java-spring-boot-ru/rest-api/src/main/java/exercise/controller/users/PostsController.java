@@ -29,6 +29,7 @@ public class PostsController {
             @PathVariable Integer id,
             @RequestBody Post data
     ) {
+        data.setUserId(id);
         posts.add(data);
         return data;
     }
