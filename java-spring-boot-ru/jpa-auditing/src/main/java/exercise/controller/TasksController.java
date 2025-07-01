@@ -60,4 +60,10 @@ public class TasksController {
         existingTask.setTitle(task.getTitle());
         return taskRepository.save(existingTask);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void delete(@PathVariable long id) {
+        taskRepository.deleteById(id);
+    }
 }
