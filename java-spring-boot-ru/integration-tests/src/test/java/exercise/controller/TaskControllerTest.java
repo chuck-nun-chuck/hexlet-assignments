@@ -68,9 +68,16 @@ class TaskControllerTest {
     // BEGIN
     @Test
     public void testShow() throws Exception {
-        var result = mockMvc.perform(get("/tasks/1"))
-                .andExpect(status().isOk())
-                .andReturn();
+        var task = Instancio.of(Task.class)
+            .ignore(Select.field(Task::getId))
+            .supply(Select.field(Task::getTitle), () -> faker.lorem().word())
+            .supply(Select.field(Task::getDescription), () -> faker.lorem().sentence(5))
+            .create();
+        taskRepository.save(task);
+
+        var result = mockMvc.perform(get("/tasks/" + task.getId()))
+            .andExpect(status().isOk())
+            .andReturn();
     }
     
     @Test
